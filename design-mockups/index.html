@@ -1,0 +1,142 @@
+<!doctype html>
+<html data-theme="midnight">
+<head>
+<meta charset="utf-8"/>
+<title>Cyber Arena — Design Mockups</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="theme.css">
+</head>
+<body class="min-h-screen">
+
+<header class="grid-bg relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(60% 70% at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);"></div>
+  <div class="max-w-6xl mx-auto px-6 pt-20 pb-14 relative">
+    <div class="flex items-center gap-2 mb-6">
+      <div class="w-9 h-9 rounded-xl" style="background: var(--logo-grad); box-shadow: var(--accent-glow);"></div>
+      <span class="logo-text text-xl">Cyber Arena</span>
+      <span class="chip ml-3">design mockups · v0.1</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Pick a screen, switch themes.</h1>
+    <p class="muted mt-3 max-w-2xl">Static HTML previews of four key screens in three visual directions
+      (<span class="fg-soft">Midnight Ops</span>, <span class="fg-soft">HTB Neon</span>,
+      <span class="fg-soft">Enterprise Light</span>). Use the switcher in the top-right of each
+      page to flip styles instantly. Nothing in the real app has been changed.</p>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-5">
+  <a href="landing.html" class="card p-6 block">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+           style="background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold">Landing page</h3>
+        <p class="muted text-xs">Hero · animated terminal · feature tiles · metric strip</p>
+      </div>
+    </div>
+    <div class="rounded-xl overflow-hidden border-soft h-44 grid-bg flex items-center justify-center" style="background: var(--elev2)">
+      <span class="logo-text text-2xl">Cyber Arena</span>
+    </div>
+  </a>
+
+  <a href="dashboard.html" class="card p-6 block">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+           style="background: color-mix(in srgb, var(--accent-2) 14%, transparent); color: var(--accent-2)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold">Dashboard</h3>
+        <p class="muted text-xs">KPI tiles · scan timeline · severity donut · activity feed</p>
+      </div>
+    </div>
+    <div class="rounded-xl overflow-hidden border-soft h-44 flex items-center gap-2 p-3" style="background: var(--elev2)">
+      <div class="flex-1 grid grid-cols-2 gap-2 h-full">
+        <div class="rounded-lg" style="background: var(--elev3)"></div>
+        <div class="rounded-lg" style="background: var(--elev3)"></div>
+        <div class="rounded-lg col-span-2" style="background: var(--elev3)"></div>
+      </div>
+      <div class="w-24 h-full rounded-lg" style="background: var(--elev3)"></div>
+    </div>
+  </a>
+
+  <a href="nmap.html" class="card p-6 block">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+           style="background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold">Tool page — Nmap</h3>
+        <p class="muted text-xs">Three-pane: parameters · live terminal · parsed findings</p>
+      </div>
+    </div>
+    <div class="rounded-xl overflow-hidden border-soft h-44 grid grid-cols-12 gap-2 p-3" style="background: var(--elev2)">
+      <div class="col-span-3 rounded-lg" style="background: var(--elev3)"></div>
+      <div class="col-span-6 rounded-lg" style="background: var(--bg); border:1px solid var(--border)"></div>
+      <div class="col-span-3 rounded-lg" style="background: var(--elev3)"></div>
+    </div>
+  </a>
+
+  <a href="soc.html" class="card p-6 block">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+           style="background: color-mix(in srgb, var(--sev-crit) 14%, transparent); color: var(--sev-crit)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold">SOC / SIEM</h3>
+        <p class="muted text-xs">Events over time · alerts · live tail · MITRE heatmap</p>
+      </div>
+    </div>
+    <div class="rounded-xl overflow-hidden border-soft h-44 p-3" style="background: var(--elev2)">
+      <div class="flex items-end gap-[2px] h-full">
+        <script>
+          // simple inline bars preview is fine; static pattern
+        </script>
+        <!-- decorative bars -->
+      </div>
+      <div class="flex items-end gap-[2px] h-full">
+        <div style="width:6px;height:30%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:45%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:60%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:35%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:80%;background:var(--sev-high)"></div>
+        <div style="width:6px;height:50%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:90%;background:var(--sev-crit)"></div>
+        <div style="width:6px;height:65%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:55%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:75%;background:var(--sev-high)"></div>
+        <div style="width:6px;height:45%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:35%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:60%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:85%;background:var(--sev-crit)"></div>
+        <div style="width:6px;height:50%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:70%;background:var(--sev-high)"></div>
+        <div style="width:6px;height:40%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:55%;background:var(--sev-med)"></div>
+        <div style="width:6px;height:30%;background:var(--sev-low)"></div>
+        <div style="width:6px;height:65%;background:var(--sev-med)"></div>
+      </div>
+    </div>
+  </a>
+</main>
+
+<section class="max-w-6xl mx-auto px-6 pb-16">
+  <div class="card p-6">
+    <h3 class="font-semibold mb-3">How to view</h3>
+    <p class="muted text-sm">Open <span class="mono">design-mockups/index.html</span> in your browser. Or serve the folder locally:</p>
+    <pre class="mono text-xs p-3 rounded-lg mt-3" style="background: var(--bg); border:1px solid var(--border)">cd design-mockups
+python3 -m http.server 7777
+# then open http://127.0.0.1:7777</pre>
+  </div>
+</section>
+
+<script src="theme.js"></script>
+</body>
+</html>

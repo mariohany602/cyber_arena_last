@@ -1,0 +1,276 @@
+<!doctype html>
+<html data-theme="midnight">
+<head>
+<meta charset="utf-8"/>
+<title>Cyber Arena — SOC / SIEM (mockup)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="theme.css">
+<style>
+  .tab { padding: 8px 14px; font-size: 13px; font-weight: 600; color: var(--muted);
+    border-bottom: 2px solid transparent; cursor: pointer; }
+  .tab.active { color: var(--fg); border-color: var(--accent); }
+  .log-row { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px;
+    padding: 6px 10px; border-bottom: 1px solid var(--border); display: grid;
+    grid-template-columns: 150px 80px 110px 1fr; gap: 10px; align-items: baseline; }
+  .log-row:hover { background: var(--elev2); }
+</style>
+</head>
+<body class="min-h-screen flex">
+
+<aside class="w-16 shrink-0 sticky top-0 h-screen flex flex-col items-center py-4 gap-3"
+       style="border-right: 1px solid var(--border); background: var(--elev1);">
+  <div class="w-9 h-9 rounded-xl" style="background: var(--logo-grad)"></div>
+  <button class="w-10 h-10 rounded-lg mt-4"></button>
+  <button class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--elev2); color: var(--accent)">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+  </button>
+</aside>
+
+<main class="flex-1 min-w-0">
+  <!-- Topbar -->
+  <div class="px-6 pt-5 pb-3" style="border-bottom: 1px solid var(--border); background: var(--elev1)">
+    <div class="flex items-center gap-3 flex-wrap">
+      <h1 class="text-xl font-bold tracking-tight">Security Operations</h1>
+      <span class="chip"><span class="dot dot-live"></span> Elastic connected · cluster <span class="mono ml-1">elk-prod</span></span>
+      <div class="ml-auto flex items-center gap-2">
+        <button class="btn">Client: <span class="font-semibold ml-1">ACME Sec</span> ⌄</button>
+        <button class="btn">Index: <span class="mono ml-1">logs-acme-*</span> ⌄</button>
+        <button class="btn">Last 1h ⌄</button>
+        <button class="btn">↻ Auto</button>
+        <button class="btn btn-primary">+ New rule</button>
+      </div>
+    </div>
+    <!-- Tabs -->
+    <div class="flex gap-1 mt-4 -mb-3">
+      <div class="tab active">Overview</div>
+      <div class="tab">Alerts <span class="sev-chip sev-chip-crit ml-1">3</span></div>
+      <div class="tab">Logs</div>
+      <div class="tab">Hunt</div>
+      <div class="tab">Rules</div>
+      <div class="tab">EDR <span class="chip ml-1">soon</span></div>
+      <div class="tab">SOAR <span class="chip ml-1">soon</span></div>
+    </div>
+  </div>
+
+  <div class="p-6 space-y-4">
+
+    <!-- KPI row -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      <div class="card p-4"><div class="muted text-xs">Events / min</div><div class="text-2xl font-bold mt-1">14.2K</div></div>
+      <div class="card p-4"><div class="muted text-xs">Open alerts</div><div class="text-2xl font-bold mt-1 sev-crit">23</div></div>
+      <div class="card p-4"><div class="muted text-xs">Mean time to detect</div><div class="text-2xl font-bold mt-1">42s</div></div>
+      <div class="card p-4"><div class="muted text-xs">Mean time to respond</div><div class="text-2xl font-bold mt-1">7.2m</div></div>
+      <div class="card p-4"><div class="muted text-xs">Hosts reporting</div><div class="text-2xl font-bold mt-1">1,486</div></div>
+    </div>
+
+    <!-- Events over time + map -->
+    <div class="grid lg:grid-cols-3 gap-4">
+      <div class="card p-5 lg:col-span-2">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="font-semibold">Events over time</h3>
+            <p class="muted text-xs">By severity · 1h window · 1m buckets</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="chip"><span class="w-2 h-2 rounded-sm inline-block" style="background: var(--sev-crit)"></span> crit</span>
+            <span class="chip"><span class="w-2 h-2 rounded-sm inline-block" style="background: var(--sev-high)"></span> high</span>
+            <span class="chip"><span class="w-2 h-2 rounded-sm inline-block" style="background: var(--sev-med)"></span> med</span>
+            <span class="chip"><span class="w-2 h-2 rounded-sm inline-block" style="background: var(--sev-low)"></span> low</span>
+          </div>
+        </div>
+        <!-- stacked bars -->
+        <div class="flex items-end gap-[3px] h-[200px] mt-2">
+          <!-- generate 40 bars; heights approximate -->
+          <script>
+            // inline generator
+          </script>
+          <!-- pre-rendered bars -->
+          <template id="b"></template>
+        </div>
+        <div id="bars" class="flex items-end gap-[3px] h-[200px]"></div>
+        <div class="flex justify-between mt-2 muted text-[10px] mono">
+          <span>13:00</span><span>13:15</span><span>13:30</span><span>13:45</span><span>14:00</span>
+        </div>
+      </div>
+
+      <div class="card p-5">
+        <h3 class="font-semibold">Top source geos</h3>
+        <p class="muted text-xs mb-4">Last 1h · auth failures</p>
+        <div class="space-y-2.5 text-sm">
+          <div class="flex items-center gap-2"><span class="mono w-8">🇨🇳</span> China <span class="ml-auto mono">4,128</span></div>
+          <div class="h-1 rounded-full" style="background: var(--elev3)"><div class="h-full rounded-full" style="width:95%; background: var(--sev-crit)"></div></div>
+          <div class="flex items-center gap-2"><span class="mono w-8">🇷🇺</span> Russia <span class="ml-auto mono">2,901</span></div>
+          <div class="h-1 rounded-full" style="background: var(--elev3)"><div class="h-full rounded-full" style="width:68%; background: var(--sev-high)"></div></div>
+          <div class="flex items-center gap-2"><span class="mono w-8">🇧🇷</span> Brazil <span class="ml-auto mono">1,455</span></div>
+          <div class="h-1 rounded-full" style="background: var(--elev3)"><div class="h-full rounded-full" style="width:42%; background: var(--sev-med)"></div></div>
+          <div class="flex items-center gap-2"><span class="mono w-8">🇻🇳</span> Vietnam <span class="ml-auto mono">844</span></div>
+          <div class="h-1 rounded-full" style="background: var(--elev3)"><div class="h-full rounded-full" style="width:28%; background: var(--sev-low)"></div></div>
+          <div class="flex items-center gap-2"><span class="mono w-8">🇮🇷</span> Iran <span class="ml-auto mono">512</span></div>
+          <div class="h-1 rounded-full" style="background: var(--elev3)"><div class="h-full rounded-full" style="width:18%; background: var(--sev-low)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alerts table + Live logs -->
+    <div class="grid lg:grid-cols-5 gap-4">
+      <div class="card p-5 lg:col-span-3">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold">Open alerts</h3>
+          <div class="flex gap-2">
+            <button class="chip">Assign</button>
+            <button class="chip">Close</button>
+            <button class="chip">Run playbook</button>
+          </div>
+        </div>
+        <table class="w-full text-sm">
+          <thead class="text-left muted text-xs uppercase tracking-wide">
+            <tr><th class="py-2 w-6"><input type="checkbox"/></th><th>Severity</th><th>Rule</th><th>Entity</th><th>Count</th><th>Age</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox" checked/></td>
+              <td><span class="sev-chip sev-chip-crit">Critical</span></td>
+              <td><div class="font-medium">Impossible travel</div><div class="muted text-xs mono">T1078 · user-behavior</div></td>
+              <td class="mono">a.salem@acme.io</td><td class="mono">8</td><td class="muted">2m</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox"/></td>
+              <td><span class="sev-chip sev-chip-crit">Critical</span></td>
+              <td><div class="font-medium">Mimikatz signature in proc memory</div><div class="muted text-xs mono">T1003 · edr-yara</div></td>
+              <td class="mono">WIN-DC-02</td><td class="mono">1</td><td class="muted">11m</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox"/></td>
+              <td><span class="sev-chip sev-chip-high">High</span></td>
+              <td><div class="font-medium">Outbound to known C2 (Cobalt Strike)</div><div class="muted text-xs mono">T1071 · ti-feed</div></td>
+              <td class="mono">10.20.4.18</td><td class="mono">23</td><td class="muted">18m</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox"/></td>
+              <td><span class="sev-chip sev-chip-high">High</span></td>
+              <td><div class="font-medium">Brute force on SSH (8 → 1)</div><div class="muted text-xs mono">T1110 · auth-bruteforce</div></td>
+              <td class="mono">bastion-01</td><td class="mono">412</td><td class="muted">34m</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox"/></td>
+              <td><span class="sev-chip sev-chip-med">Medium</span></td>
+              <td><div class="font-medium">Suspicious PowerShell encoded command</div><div class="muted text-xs mono">T1059.001</div></td>
+              <td class="mono">FIN-LT-104</td><td class="mono">3</td><td class="muted">1h</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+            <tr style="border-top: 1px solid var(--border)"><td class="py-3"><input type="checkbox"/></td>
+              <td><span class="sev-chip sev-chip-low">Low</span></td>
+              <td><div class="font-medium">New ASN observed for user</div><div class="muted text-xs mono">geo-anomaly</div></td>
+              <td class="mono">o.fahmy@acme.io</td><td class="mono">1</td><td class="muted">2h</td>
+              <td><button class="btn" style="padding:4px 10px">Triage</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Live log stream -->
+      <div class="card p-0 lg:col-span-2 overflow-hidden flex flex-col">
+        <div class="px-4 py-3 flex items-center gap-2" style="border-bottom: 1px solid var(--border)">
+          <h3 class="font-semibold text-sm">Live log stream</h3>
+          <span class="chip ml-auto"><span class="dot dot-live"></span> tailing</span>
+        </div>
+        <div class="px-4 py-2 flex gap-2" style="border-bottom: 1px solid var(--border)">
+          <input class="mono text-xs flex-1 px-2 py-1.5 rounded" style="background: var(--elev2); border:1px solid var(--border); color: var(--fg)"
+                 value='event.severity:>=high AND event.action:"failed login"'/>
+          <button class="chip">KQL</button>
+        </div>
+        <div class="overflow-y-auto" style="max-height: 420px">
+          <div class="log-row"><span class="muted">13:54:02.118</span><span class="sev-chip sev-chip-crit">crit</span><span class="mono muted">auth.fail</span><span>Impossible travel — <span class="mono">a.salem@acme.io</span> from <span class="mono">198.51.100.4</span></span></div>
+          <div class="log-row"><span class="muted">13:54:01.802</span><span class="sev-chip sev-chip-high">high</span><span class="mono muted">edr.proc</span><span><span class="mono">powershell.exe</span> → encoded cmd · parent <span class="mono">winword.exe</span></span></div>
+          <div class="log-row"><span class="muted">13:54:00.991</span><span class="sev-chip sev-chip-info">info</span><span class="mono muted">net.flow</span><span><span class="mono">10.20.4.18</span> → <span class="mono">185.220.101.47:443</span> · 4.2 MB</span></div>
+          <div class="log-row"><span class="muted">13:53:59.214</span><span class="sev-chip sev-chip-high">high</span><span class="mono muted">auth.fail</span><span>ssh root@<span class="mono">bastion-01</span> from <span class="mono">218.92.0.158</span> ×7</span></div>
+          <div class="log-row"><span class="muted">13:53:58.044</span><span class="sev-chip sev-chip-med">med</span><span class="mono muted">dns.query</span><span><span class="mono">FIN-LT-104</span> → <span class="mono">paste.ee</span> (newly seen)</span></div>
+          <div class="log-row"><span class="muted">13:53:57.612</span><span class="sev-chip sev-chip-info">info</span><span class="mono muted">file.create</span><span><span class="mono">/tmp/.x-c0re</span> on <span class="mono">web-02</span></span></div>
+          <div class="log-row"><span class="muted">13:53:56.318</span><span class="sev-chip sev-chip-low">low</span><span class="mono muted">auth.ok</span><span>sso login · <span class="mono">m.hany@acme.io</span> · MFA ok</span></div>
+          <div class="log-row"><span class="muted">13:53:55.012</span><span class="sev-chip sev-chip-high">high</span><span class="mono muted">ti.match</span><span>Outbound to <span class="mono">cobaltstrike.feed</span> · score 0.94</span></div>
+          <div class="log-row"><span class="muted">13:53:54.118</span><span class="sev-chip sev-chip-info">info</span><span class="mono muted">k8s.audit</span><span><span class="mono">kubectl exec</span> by <span class="mono">build-bot</span> on <span class="mono">api-7f4</span></span></div>
+          <div class="log-row"><span class="muted">13:53:53.012</span><span class="sev-chip sev-chip-info">info</span><span class="mono muted">scan.evt</span><span>Nuclei finished on <span class="mono">api.northwind.io</span> · 1 crit</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: rule editor preview + mitre -->
+    <div class="grid lg:grid-cols-2 gap-4">
+      <div class="card p-5">
+        <h3 class="font-semibold mb-3">Rule preview</h3>
+        <pre class="mono text-xs p-4 rounded-lg" style="background: var(--bg); border:1px solid var(--border); white-space: pre-wrap;">name: impossible-travel-v2
+severity: critical
+mitre: [T1078, T1110]
+query: |
+  FROM logs-*-auth
+  | where event.action == "login"
+  | by user.name 5m
+  | velocity(geo.location) &gt; 900 km/h
+actions:
+  - notify: slack#sec-alerts
+  - playbook: disable_user_until_review</pre>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-semibold mb-3">MITRE ATT&amp;CK coverage</h3>
+        <div class="grid grid-cols-7 gap-1.5">
+          <!-- 28 cells of varying intensity -->
+          <script>
+            // we’ll draw with template literals
+          </script>
+          <!-- pre-rendered cells -->
+          <div id="mitre" class="contents"></div>
+        </div>
+        <div class="flex items-center justify-between muted text-xs mt-3">
+          <span>Less</span>
+          <div class="flex gap-1">
+            <span class="w-3 h-3 rounded-sm" style="background: var(--elev3)"></span>
+            <span class="w-3 h-3 rounded-sm" style="background: color-mix(in srgb, var(--accent) 25%, var(--elev3))"></span>
+            <span class="w-3 h-3 rounded-sm" style="background: color-mix(in srgb, var(--accent) 50%, var(--elev3))"></span>
+            <span class="w-3 h-3 rounded-sm" style="background: color-mix(in srgb, var(--accent) 75%, var(--elev3))"></span>
+            <span class="w-3 h-3 rounded-sm" style="background: var(--accent)"></span>
+          </div>
+          <span>More</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// Stacked bars
+(function () {
+  const bars = document.getElementById('bars');
+  if (!bars) return;
+  const colors = ['var(--sev-low)', 'var(--sev-med)', 'var(--sev-high)', 'var(--sev-crit)'];
+  for (let i = 0; i < 60; i++) {
+    const total = 60 + Math.round(Math.random() * 90);
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex; flex-direction:column-reverse; gap:1px; width:6px;';
+    let left = total;
+    [0.55, 0.25, 0.15, 0.05].forEach((p, idx) => {
+      const h = Math.max(2, Math.round(total * p * (0.7 + Math.random()*0.6)));
+      const seg = document.createElement('div');
+      seg.style.cssText = `height:${h}px; background:${colors[idx]}; border-radius:1px;`;
+      wrap.appendChild(seg);
+      left -= h;
+    });
+    bars.appendChild(wrap);
+  }
+})();
+
+// Mitre heatmap
+(function () {
+  const m = document.getElementById('mitre');
+  if (!m) return;
+  for (let i = 0; i < 56; i++) {
+    const intensity = Math.random();
+    const cell = document.createElement('div');
+    let bg = 'var(--elev3)';
+    if (intensity > 0.85) bg = 'var(--accent)';
+    else if (intensity > 0.65) bg = 'color-mix(in srgb, var(--accent) 75%, var(--elev3))';
+    else if (intensity > 0.45) bg = 'color-mix(in srgb, var(--accent) 50%, var(--elev3))';
+    else if (intensity > 0.2) bg = 'color-mix(in srgb, var(--accent) 25%, var(--elev3))';
+    cell.style.cssText = `aspect-ratio: 1; border-radius: 4px; background:${bg};`;
+    m.appendChild(cell);
+  }
+})();
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

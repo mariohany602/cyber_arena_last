@@ -1,0 +1,110 @@
+╔════════════════════════════════════════════════════════════════╗
+║             n8n SOAR Integration - Quick Setup                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+✅ INTEGRATION COMPLETE!
+Your Cyber Arena platform now supports n8n SOAR workflows.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 QUICK SETUP (3 Steps)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  GET YOUR n8n API KEY
+   • Open: http://100.90.206.1:5678
+   • Go to: Settings → API → Generate API Key
+   • Copy the key
+
+2️⃣  CONFIGURE INTEGRATION
+   
+   Option A - Interactive (Recommended):
+   $ cd backend
+   $ .venv/bin/python configure_n8n.py
+   
+   Option B - Manual:
+   Edit run_app.sh and add:
+   
+   export N8N_URL="http://100.90.206.1:5678"
+   export N8N_API_KEY="your-api-key-here"
+   
+   # For webhook integration (recommended):
+   export N8N_WEBHOOK_BLOCK_IP="http://100.90.206.1:5678/webhook/block-ip"
+
+3️⃣  RESTART BACKEND
+   $ cd ..
+   $ ./run_app.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧪 TEST THE CONNECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After configuring, test the integration:
+
+# 1. Login to get your JWT token
+curl -X POST http://localhost:8000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"fady0sobhy78@gmail.com","password":"password123"}'
+
+# Copy the "access_token" from response
+
+# 2. Test connection (replace YOUR_TOKEN with actual token)
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+  http://localhost:8000/api/soc/soar/test-connection
+
+Expected: {"success": true, "platform": "n8n", ...}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📝 CREATE YOUR FIRST n8n WORKFLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+In n8n (http://100.90.206.1:5678):
+
+1. Create New Workflow
+2. Add "Webhook" node:
+   - Path: /webhook/block-ip
+   - Method: POST
+   - Respond: Wait for workflow
+3. Add your action nodes (HTTP, Database, etc.)
+4. Activate the workflow ⚡
+5. Copy the webhook URL
+6. Add to run_app.sh:
+   export N8N_WEBHOOK_BLOCK_IP="http://100.90.206.1:5678/webhook/block-ip"
+7. Restart backend
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 AVAILABLE ACTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• block_ip           - Block IP on firewall
+• isolate_endpoint   - Quarantine endpoint
+• disable_user       - Disable user account
+• run_playbook       - Run custom workflow
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 N8N_SETUP_SUMMARY.md    - Quick start guide
+📄 N8N_INTEGRATION.md      - Complete integration guide with examples
+📄 backend/.env.n8n.example - Configuration template
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: "n8n not configured"
+Fix: Set N8N_URL and restart backend
+
+Problem: "Cannot connect to n8n"
+Fix: Check n8n is running: curl http://100.90.206.1:5678
+
+Problem: Webhook not triggering
+Fix: Make sure workflow is activated in n8n (⚡ icon)
+
+Problem: API key not working
+Fix: Regenerate key in n8n Settings → API
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ STATUS: READY TO CONFIGURE
+
+Next: Run the configuration wizard or manually edit run_app.sh

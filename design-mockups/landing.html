@@ -1,0 +1,151 @@
+<!doctype html>
+<html data-theme="midnight">
+<head>
+<meta charset="utf-8"/>
+<title>Cyber Arena — Landing (mockup)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="theme.css">
+</head>
+<body class="min-h-screen">
+
+<!-- Nav -->
+<header class="sticky top-0 z-40 backdrop-blur" style="background: color-mix(in srgb, var(--bg) 75%, transparent); border-bottom: 1px solid var(--border);">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg" style="background: var(--logo-grad); box-shadow: var(--accent-glow);"></div>
+      <span class="logo-text text-lg">Cyber Arena</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-8 text-sm fg-soft">
+      <a>Platform</a><a>Tools</a><a>SOC</a><a>Pricing</a><a>Docs</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button class="btn">Sign in</button>
+      <button class="btn btn-primary">Start free</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative grid-bg overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%);"></div>
+  <div class="max-w-7xl mx-auto px-6 pt-20 pb-16 grid lg:grid-cols-2 gap-12 relative">
+    <div>
+      <div class="chip mb-5"><span class="dot dot-live"></span> Live · 1,284 scans running now</div>
+      <h1 class="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+        The offensive security<br/>
+        platform with a <span class="logo-text">native SOC</span>.
+      </h1>
+      <p class="mt-5 text-lg fg-soft max-w-xl">
+        Recon, exploit, and triage from one workspace. Nmap, Nuclei, SQLMap,
+        ffuf, gobuster, Nikto — orchestrated, parsed, and piped straight into
+        your SIEM.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <button class="btn btn-primary">Run a sandbox scan →</button>
+        <button class="btn"><span class="mono text-xs">⌘K</span> Open command palette</button>
+      </div>
+      <div class="mt-10 flex items-center gap-8 muted text-xs">
+        <span>TRUSTED BY</span>
+        <span class="fg-soft font-semibold">ACME&nbsp;SEC</span>
+        <span class="fg-soft font-semibold">NORTHWIND</span>
+        <span class="fg-soft font-semibold">HOOLI&nbsp;CSIRT</span>
+        <span class="fg-soft font-semibold">INITECH</span>
+      </div>
+    </div>
+
+    <!-- Animated terminal -->
+    <div class="card p-0 overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-2.5 border-b" style="border-color: var(--border)">
+        <span class="w-2.5 h-2.5 rounded-full" style="background:#FF5F57"></span>
+        <span class="w-2.5 h-2.5 rounded-full" style="background:#FEBC2E"></span>
+        <span class="w-2.5 h-2.5 rounded-full" style="background:#28C840"></span>
+        <span class="mono text-xs muted ml-3">cyber-arena · nmap@scanner-01</span>
+        <span class="ml-auto chip"><span class="dot dot-live"></span> live</span>
+      </div>
+      <div class="term rounded-none border-0">
+<span class="prompt">$</span> nmap -sV -sC -T4 demo.cyber-arena.io
+<span class="dim">Starting Nmap 7.94 ( https://nmap.org )</span>
+Nmap scan report for demo.cyber-arena.io (104.21.18.42)
+Host is up (0.012s latency).
+PORT     STATE SERVICE       VERSION
+22/tcp   open  ssh           OpenSSH 8.9p1
+80/tcp   open  http          nginx 1.24.0
+443/tcp  open  ssl/http      nginx 1.24.0
+| ssl-cert: Subject: commonName=demo.cyber-arena.io
+| <span class="warn">ssl-enum-ciphers: TLS 1.0 enabled  (weak)</span>
+3306/tcp open  mysql         MySQL 8.0.36
+<span class="ok">✓</span> 4 services fingerprinted in 6.2s
+<span class="ok">✓</span> 1 finding piped → SIEM (rule: weak-tls)
+<span class="prompt">$</span> <span class="dim">▍</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature tiles -->
+<section class="max-w-7xl mx-auto px-6 py-20">
+  <h2 class="text-3xl font-bold tracking-tight">One workspace. Three superpowers.</h2>
+  <p class="muted mt-2">From recon to remediation, without leaving the page.</p>
+  <div class="grid md:grid-cols-3 gap-5 mt-10">
+    <!-- Recon -->
+    <div class="card p-6">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+           style="background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <h3 class="text-lg font-semibold">Recon &amp; Discovery</h3>
+      <p class="muted text-sm mt-2">Nmap, subdomains, crawlers, dir/ffuf brute, Wayback, OTX, crt.sh — all orchestrated in parallel.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="chip">Nmap</span><span class="chip">Subfinder</span><span class="chip">crt.sh</span><span class="chip">ffuf</span><span class="chip">gobuster</span>
+      </div>
+    </div>
+    <!-- Exploit -->
+    <div class="card p-6">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+           style="background: color-mix(in srgb, var(--sev-high) 14%, transparent); color: var(--sev-high);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+      </div>
+      <h3 class="text-lg font-semibold">Vulnerability &amp; Exploit</h3>
+      <p class="muted text-sm mt-2">Nuclei templates, SQLMap, Nikto, vuln-script Nmap — findings auto-normalized with CVSS &amp; remediation.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="chip">Nuclei</span><span class="chip">SQLMap</span><span class="chip">Nikto</span><span class="chip">CVSS</span>
+      </div>
+    </div>
+    <!-- SOC -->
+    <div class="card p-6">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+           style="background: color-mix(in srgb, var(--accent-2) 14%, transparent); color: var(--accent-2);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+      </div>
+      <h3 class="text-lg font-semibold">Native SOC &amp; SIEM</h3>
+      <p class="muted text-sm mt-2">Elasticsearch-backed alerts, logs, hunting and timelines — multi-tenant via client field or index regex.</p>
+      <div class="mt-5 flex flex-wrap gap-1.5">
+        <span class="chip">Elastic</span><span class="chip">Multi-tenant</span><span class="chip">Hunt</span><span class="chip">Timelines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics strip -->
+<section class="max-w-7xl mx-auto px-6 pb-20">
+  <div class="card p-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div><div class="text-3xl font-bold" style="color: var(--accent)">12.4M</div><div class="muted text-xs mt-1">findings normalized</div></div>
+    <div><div class="text-3xl font-bold" style="color: var(--accent)">186</div><div class="muted text-xs mt-1">enterprise tenants</div></div>
+    <div><div class="text-3xl font-bold" style="color: var(--accent)">7.2&nbsp;min</div><div class="muted text-xs mt-1">median MTTR</div></div>
+    <div><div class="text-3xl font-bold" style="color: var(--accent)">99.98%</div><div class="muted text-xs mt-1">scanner uptime</div></div>
+  </div>
+</section>
+
+<footer class="border-soft" style="border-top: 1px solid var(--border)">
+  <div class="max-w-7xl mx-auto px-6 py-8 flex flex-wrap items-center justify-between gap-4 muted text-xs">
+    <span>© 2026 Cyber Arena · SOC2 Type II · ISO 27001</span>
+    <span class="mono">design-mockup · landing</span>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

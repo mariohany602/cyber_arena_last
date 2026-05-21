@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Cyber Arena — Global Design System
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html, body {
+    @apply bg-ui-bg text-slate-200 antialiased;
+    margin: 0;
+    min-height: 100vh;
+    min-width: 320px;
+  }
+
+  body {
+    background-color: #0A0B0F;
+    background-image:
+      radial-gradient(at 18% 0%, rgba(0, 229, 168, 0.07) 0%, transparent 45%),
+      radial-gradient(at 82% 100%, rgba(124, 140, 255, 0.07) 0%, transparent 45%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white tracking-tight font-bold;
+    letter-spacing: -0.02em;
+  }
+
+  /* Default focus ring — subtle but visible */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-primary/50 ring-offset-2 ring-offset-ui-bg rounded-lg;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 168, 0.30);
+    color: #E5FFF6;
+    text-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+@layer components {
+  /* ---------- Glass panels ---------- */
+  .glass-panel {
+    @apply bg-ui-surface/60 backdrop-blur-xl border border-ui-border/50 shadow-glass rounded-2xl;
+  }
+
+  .glass-panel-dark {
+    @apply bg-ui-bg/80 backdrop-blur-xl border-r border-ui-border/40;
+  }
+
+  .glass-panel-bright {
+    @apply bg-ui-surface-2/70 backdrop-blur-xl border border-ui-border-bright/50 shadow-glass-lg rounded-2xl;
+  }
+
+  /* ---------- Buttons ---------- */
+  .cyber-button {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+           font-bold tracking-wide overflow-hidden
+           transition-all duration-300 ease-out-expo
+           active:scale-[0.97]
+           disabled:opacity-50 disabled:pointer-events-none disabled:saturate-50;
+  }
+
+  .cyber-button-primary {
+    background: linear-gradient(135deg, #00E5A8 0%, #34E6C8 50%, #7C8CFF 100%);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    color: #07120E;
+    @apply shadow-glow-primary hover:shadow-glow-secondary hover:-translate-y-0.5;
+  }
+  .cyber-button-primary:hover {
+    background-position: 100% 50%;
+  }
+  .cyber-button-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.18) 50%, transparent 65%);
+    transform: translateX(-100%);
+    transition: transform 0.7s ease-out;
+    pointer-events: none;
+  }
+  .cyber-button-primary:hover::before {
+    transform: translateX(100%);
+  }
+
+  .cyber-button-magenta {
+    background: linear-gradient(135deg, #e879f9 0%, #c084fc 100%);
+    @apply text-white shadow-glow-magenta hover:-translate-y-0.5;
+  }
+
+  .cyber-button-outline {
+    @apply border border-ui-border-bright/70 bg-white/5 hover:bg-white/10 hover:border-brand-primary/50
+           text-slate-200 hover:-translate-y-0.5 hover:shadow-glow-primary;
+  }
+
+  .cyber-button-ghost {
+    @apply bg-transparent text-ui-muted hover:bg-white/5 hover:text-white;
+  }
+
+  /* ---------- Inputs ---------- */
+  .cyber-input {
+    @apply w-full bg-ui-bg/60 border border-ui-border/60 rounded-xl px-4 py-3
+           text-white placeholder-ui-subtle/70
+           transition-all duration-200
+           focus:outline-none focus:border-brand-primary/60 focus:bg-ui-bg/80
+           focus:shadow-[0_0_0_4px_rgba(0,229,168,0.12)]
+           hover:border-ui-border-bright/70;
+  }
+
+  /* ---------- Chips / badges ---------- */
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase
+           tracking-widest border;
+  }
+  .chip-primary { @apply bg-brand-primary/10 text-brand-primary-bright border-brand-primary/30; }
+  .chip-magenta { @apply bg-neon-magenta/10 text-neon-magenta border-neon-magenta/30; }
+  .chip-green   { @apply bg-neon-green/10 text-neon-green border-neon-green/30; }
+  .chip-yellow  { @apply bg-neon-yellow/10 text-neon-yellow border-neon-yellow/30; }
+  .chip-red     { @apply bg-neon-red/10 text-neon-red border-neon-red/30; }
+  .chip-muted   { @apply bg-white/5 text-ui-muted border-ui-border/50; }
+
+  /* Phase 2 SOC extension — neutral chip used as a clickable button. */
+  .chip-base    { @apply bg-white/5 text-ui-muted border-ui-border/40
+                         hover:text-white hover:border-ui-border-bright/60
+                         transition-colors; }
+
+  /* Phase 2 SOC extension — compact form input. Matches the visual
+     density of tables in SocPage. */
+  .soc-input {
+    @apply w-full bg-ui-surface border border-ui-border/40 rounded-lg
+           px-3 py-2 text-sm text-white placeholder-ui-subtle
+           focus:outline-none focus:border-brand-primary/60
+           focus:shadow-[0_0_0_3px_rgba(0,229,168,0.10)]
+           transition-colors;
+  }
+
+  /* ---------- Card hover lift ---------- */
+  .lift-card {
+    @apply transition-all duration-300 ease-out-expo
+           hover:-translate-y-1 hover:shadow-card-hover hover:border-brand-primary/40;
+  }
+
+  /* ---------- Custom scrollbar ---------- */
+  .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+  .custom-scrollbar::-webkit-scrollbar-track { @apply bg-transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-ui-border/60 rounded-full hover:bg-brand-primary/40 transition-colors;
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-eyebrow {
+    @apply text-[10px] font-black text-ui-muted uppercase tracking-[0.3em] flex items-center gap-2;
+  }
+
+  /* ---------- Divider with shine ---------- */
+  .divider-shine {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@layer utilities {
+
+  /* ---------- Background patterns ---------- */
+  .bg-grid-white {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+  }
+
+  .bg-dot-white {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-glow-radial {
+    background-image: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 229, 168, 0.18), transparent 70%);
+  }
+
+  /* ---------- Text effects ---------- */
+  .text-glow-primary { text-shadow: 0 0 24px rgba(0, 229, 168, 0.6); }
+  .text-glow-cyan    { text-shadow: 0 0 24px rgba(91, 192, 235, 0.6); }
+  .text-glow-magenta { text-shadow: 0 0 24px rgba(232, 121, 249, 0.6); }
+  .text-glow-green   { text-shadow: 0 0 24px rgba(0, 229, 168, 0.6); }
+
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #00E5A8 0%, #34E6C8 50%, #7C8CFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-shimmer {
+    background: linear-gradient(110deg, #fff 30%, #8A93A6 45%, #fff 60%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* ---------- Scanlines ---------- */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.12) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
+
+  /* ---------- Inner glow utility ---------- */
+  .shadow-inner-glow {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 0 32px rgba(0, 229, 168, 0.05);
+  }
+
+  /* ---------- Status pulse ---------- */
+  .animate-status-pulse {
+    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(0.92); }
+  }
+
+  /* ---------- Animated border gradient ---------- */
+  .border-gradient {
+    position: relative;
+    background: linear-gradient(#11141B, #11141B) padding-box,
+                linear-gradient(135deg, rgba(0, 229, 168, 0.5), rgba(124, 140, 255, 0.5)) border-box;
+    border: 1px solid transparent;
+  }
+
+  /* ---------- No-scrollbar helper ---------- */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ==========================================================================
+   Default scrollbar (page-level)
+   ========================================================================== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0A0B0F; }
+::-webkit-scrollbar-thumb {
+  background: #1F2430;
+  border-radius: 6px;
+  border: 2px solid #0A0B0F;
+}
+::-webkit-scrollbar-thumb:hover { background: #2A3142; }

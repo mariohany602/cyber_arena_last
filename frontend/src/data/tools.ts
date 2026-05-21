@@ -1,0 +1,135 @@
+export interface Tool {
+    id: string;
+    name: string;
+    category: string;
+    team: "Red" | "Blue";
+    level: string;
+    description: string;
+    use_cases: string[];
+    actionLabel?: string;
+    icon?: string;
+    path: string; // [مهم جداً] لربط الكارت بالصفحة
+}
+
+export const tools: Tool[] = [
+    {
+        id: "nmap-scanner",
+        name: "Nmap Scanner",
+        category: "Network",
+        team: "Red",
+        level: "Beginner",
+        description: "Scan ports and discover services on a target host to identify potential entry points.",
+        use_cases: ["Port Scanning", "Network Discovery", "Service Identification"],
+        actionLabel: "Start Scan",
+        icon: "📡",
+        path: "/tools/nmap-scanner",
+    },
+    {
+        id: "nikto-scanner",
+        name: "Nikto Web Scan",
+        category: "Vulnerability Assessment",
+        team: "Red",
+        level: "Intermediate",
+        description: "Comprehensive web server scanner to find dangerous files and outdated software vulnerabilities.",
+        use_cases: ["Vulnerability Assessment", "Server Auditing", "Config Analysis"],
+        actionLabel: "Execute Nikto",
+        icon: "🕸️",
+        path: "/tools/nikto",
+    },
+    {
+        id: "web-crawler",
+        name: "Web Crawler",
+        category: "Web Tools",
+        team: "Red",
+        level: "Intermediate",
+        description: "Crawl and map website structure, discovering hidden pages and resources.",
+        use_cases: ["Reconnaissance", "Site Mapping"],
+        actionLabel: "Start Crawling",
+        icon: "🕷️",
+        path: "/tools/web-crawler",
+    },
+    {
+        id: "vuln-scanner",
+        name: "Vulnerability Scanner",
+        category: "Web Tools",
+        team: "Red",
+        level: "Advanced",
+        description: "Scan web applications for common vulnerabilities like XSS and misconfigurations.",
+        use_cases: ["Automated Scanning", "Vulnerability Assessment"],
+        actionLabel: "Start Scan",
+        icon: "⚔️",
+        path: "/tools/vuln-scanner",
+    },
+    {
+        id: "subdomain-enum",
+        name: "Subdomains Enumeration",
+        category: "Web Tools",
+        team: "Red",
+        level: "Intermediate",
+        description: "Discover subdomains associated with a target domain to expand attack surface.",
+        use_cases: ["Reconnaissance", "Asset Discovery"],
+        actionLabel: "Find Subdomains",
+        icon: "🔍",
+        path: "/tools/subdomain-enum",
+    },
+    {
+        id: "dir-enum",
+        name: "Directory Enumeration",
+        category: "Web Tools",
+        team: "Red",
+        level: "Intermediate",
+        description: "Discover hidden directories and files on web servers using brute-force.",
+        use_cases: ["Reconnaissance", "Content Discovery"],
+        actionLabel: "Start Enumeration",
+        icon: "📂",
+        path: "/tools/dir-enum",
+    },
+    {
+        id: "traffic-analyzer",
+        name: "Traffic Analyzer",
+        category: "Blue Team",
+        team: "Blue",
+        level: "Intermediate",
+        description: "Analyze network packets to detect suspicious activities and potential threats.",
+        use_cases: ["Packet Sniffing", "Threat Hunting"],
+        actionLabel: "Analyze Traffic",
+        icon: "🛡️",
+        path: "/tools/analyzer",
+    },
+    {
+        id: "ffuf",
+        name: "FFUF Fuzzer",
+        category: "Web Tools",
+        team: "Red",
+        level: "Intermediate",
+        description: "Fast web fuzzer for directory, parameter, and endpoint discovery using custom wordlists.",
+        use_cases: ["Directory Fuzzing", "Parameter Discovery", "Content Discovery"],
+        actionLabel: "Start Fuzzing",
+        icon: "⚡",
+        path: "/tools/ffuf",
+    },
+    {
+        id: "sqlmap",
+        name: "SQLMap",
+        category: "Web Security",
+        team: "Red",
+        level: "Advanced",
+        description: "Automated SQL injection detection and exploitation tool for database vulnerability assessment.",
+        use_cases: ["SQL Injection Testing", "Database Fingerprinting", "Vulnerability Assessment"],
+        actionLabel: "Start Injection Scan",
+        icon: "💉",
+        path: "/tools/sqlmap",
+    },
+    {
+        id: "nuclei-scanner",
+        name: "Nuclei Vulnerability Scanner",
+        category: "Vulnerability Assessment",
+        team: "Red",
+        level: "Advanced",
+        description: "Template-based vulnerability scanner with 9000+ community-maintained checks for CVEs, misconfigurations, exposures, and default credentials.",
+        use_cases: ["CVE Detection", "Misconfiguration Audit", "Vulnerability Assessment"],
+        actionLabel: "Run Nuclei Templates",
+        icon: "⚔️",
+        path: "/tools/nuclei",
+    }
+];

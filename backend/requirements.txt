@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+requests
+beautifulsoup4
+sqlalchemy
+pymysql
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+cryptography
+email-validator
+bcrypt==4.0.1
+python-nmap
+reportlab

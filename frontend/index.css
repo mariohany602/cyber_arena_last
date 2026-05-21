@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-ui-bg text-slate-200 antialiased selection:bg-brand-primary/30 selection:text-brand-primary;
+    margin: 0;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-white tracking-tight font-bold;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-ui-surface/60 backdrop-blur-md border border-ui-border/50 shadow-glass rounded-2xl;
+  }
+
+  .glass-panel-dark {
+    @apply bg-ui-bg/80 backdrop-blur-xl border-r border-ui-border/30;
+  }
+
+  .cyber-button {
+    @apply relative px-6 py-3 rounded-xl font-bold transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .cyber-button-primary {
+    @apply bg-brand-primary text-white shadow-glow-primary hover:bg-brand-primary/90 hover:shadow-glow-cyan;
+  }
+
+  .cyber-button-magenta {
+    @apply bg-neon-magenta text-white shadow-glow-magenta hover:bg-neon-magenta/90 hover:shadow-[0_0_25px_rgba(236, 72, 153, 0.5)];
+  }
+
+  .cyber-button-outline {
+    @apply border border-ui-border bg-white/5 hover:bg-white/10 text-slate-300;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-ui-bg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-ui-border/50 rounded-full hover:bg-brand-primary/30 transition-colors;
+  }
+}
+
+@layer utilities {
+  .bg-grid-white {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+  }
+
+  .text-glow-primary {
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+  }
+
+  .text-gradient-brand {
+    @apply bg-clip-text text-transparent bg-gradient-brand;
+  }
+
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .shadow-inner-glow {
+    box-shadow: inset 0 0 20px rgba(14, 165, 233, 0.05);
+  }
+
+  .shadow-glow-magenta {
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+  }
+
+  .animate-status-pulse {
+    animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes status-pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+  }
+}

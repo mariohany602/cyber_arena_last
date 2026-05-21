@@ -1,0 +1,280 @@
+<!doctype html>
+<html data-theme="midnight">
+<head>
+<meta charset="utf-8"/>
+<title>Cyber Arena — Nmap (mockup)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="theme.css">
+<style>
+  .field label { display:block; font-size:11px; font-weight:600; text-transform:uppercase;
+    letter-spacing:.04em; color: var(--muted); margin-bottom:6px; }
+  .field input, .field select {
+    width:100%; background: var(--elev2); border:1px solid var(--border);
+    color: var(--fg); border-radius:10px; padding:9px 12px; font-size: 13px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .field input:focus, .field select:focus { outline:none; border-color: var(--accent); }
+  .seg { display:flex; gap:0; padding:3px; background: var(--elev2);
+    border:1px solid var(--border); border-radius:10px; }
+  .seg button { flex:1; padding:7px 10px; font-size: 12px; font-weight:600;
+    color: var(--muted); border-radius:7px; }
+  .seg button.active { background: var(--elev3); color: var(--fg); }
+</style>
+</head>
+<body class="min-h-screen flex">
+
+<!-- Sidebar (compact) -->
+<aside class="w-16 shrink-0 sticky top-0 h-screen flex flex-col items-center py-4 gap-3"
+       style="border-right: 1px solid var(--border); background: var(--elev1);">
+  <div class="w-9 h-9 rounded-xl" style="background: var(--logo-grad)"></div>
+  <div class="flex flex-col gap-1 mt-4 text-[10px] muted">
+    <button class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--elev2); color: var(--accent)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+    <button class="w-10 h-10 rounded-lg flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></button>
+    <button class="w-10 h-10 rounded-lg flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></button>
+    <button class="w-10 h-10 rounded-lg flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></button>
+  </div>
+</aside>
+
+<main class="flex-1 min-w-0">
+  <!-- Topbar / breadcrumb -->
+  <div class="h-14 px-6 flex items-center gap-3"
+       style="border-bottom: 1px solid var(--border); background: var(--elev1)">
+    <div class="flex items-center gap-2 text-sm muted">
+      <span>Recon</span> <span>›</span>
+      <span class="fg-soft">Nmap</span>
+    </div>
+    <div class="ml-auto flex gap-2">
+      <button class="btn">Save preset</button>
+      <button class="btn">History</button>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="px-6 pt-6 flex items-end justify-between flex-wrap gap-3">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl flex items-center justify-center"
+           style="background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">Nmap</h1>
+        <p class="muted text-sm">Network discovery &amp; service fingerprinting · v7.94</p>
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <span class="chip"><span class="dot dot-live"></span> Engine ready</span>
+      <button class="btn">Export</button>
+      <button class="btn btn-primary">▶ Run scan</button>
+    </div>
+  </div>
+
+  <!-- Three-pane -->
+  <div class="p-6 grid lg:grid-cols-12 gap-4">
+
+    <!-- Left: form -->
+    <section class="card p-5 lg:col-span-3 space-y-4 self-start">
+      <h3 class="font-semibold">Parameters</h3>
+
+      <div class="field">
+        <label>Target</label>
+        <input value="10.20.0.0/24" />
+      </div>
+
+      <div class="field">
+        <label>Scan profile</label>
+        <div class="seg">
+          <button>Quick</button>
+          <button class="active">Service</button>
+          <button>Aggressive</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Ports</label>
+        <input value="1-65535" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="field">
+          <label>Timing</label>
+          <select>
+            <option>T0 — paranoid</option>
+            <option>T2 — polite</option>
+            <option selected>T4 — aggressive</option>
+            <option>T5 — insane</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Workers</label>
+          <input value="64" />
+        </div>
+      </div>
+
+      <details>
+        <summary class="text-sm font-semibold cursor-pointer fg-soft">Advanced</summary>
+        <div class="space-y-3 mt-3">
+          <div class="field"><label>NSE scripts</label><input value="default,vuln,ssl-enum-ciphers"/></div>
+          <div class="field"><label>Decoys</label><input placeholder="-D RND:10"/></div>
+          <label class="flex items-center gap-2 text-sm fg-soft"><input type="checkbox" checked> OS detection (-O)</label>
+          <label class="flex items-center gap-2 text-sm fg-soft"><input type="checkbox" checked> Pipe results to SIEM</label>
+          <label class="flex items-center gap-2 text-sm fg-soft"><input type="checkbox"> Skip host discovery (-Pn)</label>
+        </div>
+      </details>
+
+      <div class="pt-3 border-t" style="border-color: var(--border)">
+        <div class="muted text-xs mb-2">Command preview</div>
+        <pre class="mono text-xs p-3 rounded-lg" style="background: var(--bg); border:1px solid var(--border); white-space: pre-wrap">nmap -sV -sC -T4 -p 1-65535 \
+  --script default,vuln,ssl-enum-ciphers \
+  -O 10.20.0.0/24</pre>
+      </div>
+    </section>
+
+    <!-- Center: terminal -->
+    <section class="lg:col-span-6 space-y-4">
+      <div class="card p-0 overflow-hidden">
+        <div class="flex items-center gap-2 px-4 py-2.5 border-b" style="border-color: var(--border)">
+          <span class="w-2.5 h-2.5 rounded-full" style="background:#FF5F57"></span>
+          <span class="w-2.5 h-2.5 rounded-full" style="background:#FEBC2E"></span>
+          <span class="w-2.5 h-2.5 rounded-full" style="background:#28C840"></span>
+          <span class="mono text-xs muted ml-3">scanner-03 · nmap · pid 28114</span>
+          <span class="ml-auto flex items-center gap-2">
+            <span class="chip"><span class="dot dot-live"></span> running 02:14</span>
+            <button class="chip">⏸</button>
+            <button class="chip">⛔</button>
+          </span>
+        </div>
+        <div class="term rounded-none border-0 h-[420px] overflow-y-auto">
+<span class="prompt">scanner-03 $</span> nmap -sV -sC -T4 -p 1-65535 --script default,vuln,ssl-enum-ciphers -O 10.20.0.0/24
+<span class="dim">Starting Nmap 7.94 ( https://nmap.org ) at 2026-05-12 13:51 +03</span>
+<span class="dim">Pre-scan script results:</span>
+| broadcast-ping:
+|   IP: 10.20.0.1   MAC: 52:54:00:12:34:56
+|_  IP: 10.20.0.18  MAC: 02:42:ac:11:00:12
+<span class="ok">Nmap scan report for gw.lab.internal (10.20.0.1)</span>
+Host is up (0.0021s latency).
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 8.4p1 Debian 5+deb11u3
+80/tcp   open  http     nginx 1.18.0
+| http-title: Welcome to nginx!
+<span class="warn">443/tcp  open  ssl/http nginx 1.18.0</span>
+| ssl-enum-ciphers:
+|   TLSv1.0:
+|     ciphers:
+|       <span class="err">TLS_RSA_WITH_AES_128_CBC_SHA — broken</span>
+|_    <span class="warn">least strength: C</span>
+
+<span class="ok">Nmap scan report for db-01 (10.20.0.18)</span>
+Host is up (0.0014s latency).
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 8.9p1
+3306/tcp open  mysql    MySQL 8.0.36
+| mysql-info:
+|   Protocol: 10
+|   Version: 8.0.36
+|_  Auth Plugin Name: caching_sha2_password
+
+<span class="ok">Nmap scan report for app-04 (10.20.0.42)</span>
+8080/tcp open  http-proxy   HAProxy 2.6
+| http-title: 401 Unauthorized
+<span class="err">| vulners:
+|   cpe:/a:openssh:openssh:8.4p1:
+|     CVE-2023-38408  8.1   *EXPLOIT*</span>
+
+<span class="dim">[ 47%  ] 121 / 256 hosts complete — eta 02:38</span>
+<span class="prompt">▍</span>
+        </div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold">Progress</h3>
+          <span class="mono text-xs muted">121 / 256 hosts · 47%</span>
+        </div>
+        <div class="h-2 rounded-full overflow-hidden" style="background: var(--elev3)">
+          <div class="h-full" style="width:47%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: var(--accent-glow);"></div>
+        </div>
+        <div class="grid grid-cols-4 gap-4 mt-4 text-center">
+          <div><div class="text-xl font-bold">256</div><div class="muted text-xs">hosts</div></div>
+          <div><div class="text-xl font-bold" style="color: var(--accent)">38</div><div class="muted text-xs">up</div></div>
+          <div><div class="text-xl font-bold" style="color: var(--accent-2)">412</div><div class="muted text-xs">ports open</div></div>
+          <div><div class="text-xl font-bold sev-crit">7</div><div class="muted text-xs">findings</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: parsed findings -->
+    <section class="lg:col-span-3 space-y-3">
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold">Findings</h3>
+          <span class="chip"><span class="dot dot-live"></span> updating</span>
+        </div>
+        <div class="seg mb-3">
+          <button class="active">All 7</button>
+          <button>Crit 1</button>
+          <button>High 3</button>
+        </div>
+        <div class="space-y-2">
+          <div class="p-3 rounded-xl cursor-pointer" style="background: var(--elev2); border: 1px solid var(--border)">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="sev-chip sev-chip-crit">Critical</span>
+              <span class="mono text-xs muted ml-auto">CVE-2023-38408</span>
+            </div>
+            <div class="text-sm font-medium">OpenSSH PKCS#11 RCE</div>
+            <div class="mono text-xs muted mt-1">10.20.0.42 · port 22</div>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--elev2); border: 1px solid var(--border)">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="sev-chip sev-chip-high">High</span>
+              <span class="mono text-xs muted ml-auto">weak-tls</span>
+            </div>
+            <div class="text-sm font-medium">TLS 1.0 with broken cipher</div>
+            <div class="mono text-xs muted mt-1">10.20.0.1 · port 443</div>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--elev2); border: 1px solid var(--border)">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="sev-chip sev-chip-high">High</span>
+              <span class="mono text-xs muted ml-auto">smb-vuln</span>
+            </div>
+            <div class="text-sm font-medium">SMBv1 signing not required</div>
+            <div class="mono text-xs muted mt-1">10.20.0.91 · port 445</div>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--elev2); border: 1px solid var(--border)">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="sev-chip sev-chip-high">High</span>
+              <span class="mono text-xs muted ml-auto">mysql-empty-pass</span>
+            </div>
+            <div class="text-sm font-medium">MySQL root with empty password</div>
+            <div class="mono text-xs muted mt-1">10.20.0.18 · port 3306</div>
+          </div>
+          <div class="p-3 rounded-xl" style="background: var(--elev2); border: 1px solid var(--border)">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="sev-chip sev-chip-med">Medium</span>
+            </div>
+            <div class="text-sm font-medium">Server banner leaks version</div>
+            <div class="mono text-xs muted mt-1">10.20.0.1 · port 80</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-5">
+        <h3 class="font-semibold mb-3">Pipe to</h3>
+        <div class="space-y-2 text-sm">
+          <label class="flex items-center gap-2"><input type="checkbox" checked> Assessment engine</label>
+          <label class="flex items-center gap-2"><input type="checkbox" checked> SIEM (Elastic)</label>
+          <label class="flex items-center gap-2"><input type="checkbox"> Slack <span class="muted">#sec-alerts</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox"> Auto-create PDF section</label>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="theme.js"></script>
+</body>
+</html>
