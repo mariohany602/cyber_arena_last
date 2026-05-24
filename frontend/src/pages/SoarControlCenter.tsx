@@ -18,6 +18,7 @@ import {
     SocPage, SocCard, StatCard, PermissionGate, timeAgo, fmtDateTime,
 } from '../components/soc/SocLayout';
 import { useAuth } from '../context/AuthContext';
+import N8nViewer from '../components/soc/N8nViewer';
 
 const STATUS_TONE: Record<string, string> = {
     pending:    'bg-white/5 text-ui-muted border-ui-border/40',
@@ -35,6 +36,9 @@ export default function SoarControlCenter() {
     const [loading, setLoading] = useState(false);
     const [selectedAction, setSelectedAction] = useState<SoarActionSpec | null>(null);
     const [details, setDetails] = useState<SoarExecutionRow | null>(null);
+    // n8n execution viewer — load any execution by ID from the connected n8n.
+    const [n8nId, setN8nId] = useState('');
+    const [activeN8nExecutionId, setActiveN8nExecutionId] = useState<string | null>(null);
 
     const load = async () => {
         setLoading(true);
@@ -110,6 +114,14 @@ export default function SoarControlCenter() {
             })()}
             actions={
                 <>
+                    <div className="flex items-center bg-white/5 border border-ui-border/30 rounded-xl px-2 py-1 mr-2 gap-2">
+                        <span className="text-[10px] uppercase font-bold text-ui-subtle tracking-wider ml-1">n8n Execution</span>
+                        <input type="text" className="bg-transparent border-none text-xs text-white w-16 focus:outline-none placeholder:text-ui-subtle"
+                               placeholder="ID (e.g. 236)" value={n8nId}
+                               onChange={e => setN8nId(e.target.value)}
+                               onKeyDown={e => e.key === 'Enter' && n8nId && setActiveN8nExecutionId(n8nId)} />
+                        <button className="chip chip-base" onClick={() => n8nId && setActiveN8nExecutionId(n8nId)}>View</button>
+                    </div>
                     {platformChip}
                     <button onClick={testConnection} className="chip chip-base">
                         <Zap size={14} /> Test Connection
@@ -226,6 +238,7 @@ export default function SoarControlCenter() {
                 />
             )}
             {details && <ExecutionDetailsModal ex={details} onClose={() => setDetails(null)} />}
+            {activeN8nExecutionId && <N8nViewer executionId={activeN8nExecutionId} onClose={() => setActiveN8nExecutionId(null)} />}
         </SocPage>
     );
 }

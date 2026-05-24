@@ -220,6 +220,9 @@ from audit_log import router as audit_router
 from rbac_admin import router as rbac_admin_router
 # Phase 4 additions — SOAR & executive analytics.
 from soar import router as soar_router
+# n8n execution viewer — read-only proxy that exposes a workflow execution
+# (nodes, edges, per-node runData) so the frontend can render it visually.
+from soar_n8n import router as soar_n8n_router
 from exec_dashboard import router as exec_dashboard_router
 # Phase 5 additions — realtime monitoring + AI assistant.
 from realtime import router as realtime_router, broker as realtime_broker
@@ -240,6 +243,7 @@ app.include_router(assets_router)
 app.include_router(audit_router)
 app.include_router(rbac_admin_router)
 app.include_router(soar_router)
+app.include_router(soar_n8n_router, prefix="/api/soc/soar/n8n", tags=["SOAR-N8N"])
 app.include_router(exec_dashboard_router)
 app.include_router(realtime_router)
 app.include_router(ai_router)
